@@ -1,17 +1,15 @@
 package com.appazal.gymaster;
 
-import java.util.Date;
-
-import com.appazal.gymaster.Gymdb.Group;
-import com.appazal.gymaster.Gymdb.Muscle;
-import com.appazal.gymaster.Gymdb.Set;
-
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.text.TextUtils;
+
+import com.appazal.gymaster.Gymdb.Group;
+import com.appazal.gymaster.Gymdb.Muscle;
+import com.appazal.gymaster.Gymdb.Set;
 
 public class GymdbHelper extends SQLiteOpenHelper{
 	
