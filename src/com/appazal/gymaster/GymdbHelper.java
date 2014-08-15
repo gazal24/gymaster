@@ -44,10 +44,14 @@ public class GymdbHelper extends SQLiteOpenHelper{
 	    	Set.COLUMN_NAME_GROUP+ TEXT_TYPE + ")";
 
 	
-	static final String SQL_SEED_DATA = 
+	static final String SQL_SEED_MUSCLES = 
 			"INSERT INTO " + Muscle.TABLE_NAME + "(" + Muscle.COLUMN_NAME_NAME + ")" + 
 			"VALUES (\"" + TextUtils.join("\"),(\"",SeedData.Muscles) + "\")"; 
 
+	static final String SQL_SEED_GROUP = 
+			"INSERT INTO " + Group.TABLE_NAME + "(" + Group.COLUMN_NAME_NAME + ")" + 
+			"VALUES (\"" + TextUtils.join("\"),(\"",SeedData.Groups) + "\")";
+	
 	private static final String SQL_DELETE_SETS =
 	    "DROP TABLE IF EXISTS " + Set.TABLE_NAME;
 
@@ -61,7 +65,8 @@ public class GymdbHelper extends SQLiteOpenHelper{
 		db.execSQL(SQL_CREATE_MUSCLES);
 		db.execSQL(SQL_CREATE_GROUPS);
 		db.execSQL(SQL_CREATE_SETS);
-		db.execSQL(SQL_SEED_DATA);
+		db.execSQL(SQL_SEED_MUSCLES);
+		db.execSQL(SQL_SEED_GROUP);
 	}
 
 	@Override
@@ -104,41 +109,21 @@ public class GymdbHelper extends SQLiteOpenHelper{
 		db.insert(Set.TABLE_NAME, null, values);
 	}
 	
-	public static String readMuscle(Context context){
+	public static Cursor readData(Context context, String sql_query){
 		GymdbHelper mDbHelper = new GymdbHelper(context);
 		SQLiteDatabase db = mDbHelper.getReadableDatabase();
-		
-		// Define a projection that specifies which columns from the database
-		// you will actually use after this query.
-		String[] projection = {
-			Muscle._ID,
-		    Muscle.COLUMN_NAME_NAME
-		    };
 
-		// How you want the results sorted in the resulting Cursor
-		// String sortOrder = Muscle.COLUMN_NAME_UPDATED + " DESC";
-
-		Cursor cursor = db.query(
-		    Muscle.TABLE_NAME,  // The table to query
-		    projection,                               // The columns to return
-		    null,                                // The columns for the WHERE clause
-		    null,                            // The values for the WHERE clause
-		    null,                                     // don't group the rows
-		    null,                                     // don't filter by row groups
-		    null                                 // The sort order
-		    );
-		
-//		cursor.moveToFirst();
-//		int colcount=cursor.getColumnCount();
-//		while(cursor.moveToNext()){
-//			String data[] = new String[colcount];
-//			for(int i=0; i<colcount; i++){
-//				data[i] = cursor.getString(i);
-//			}
-//		}
-		
+//		Cursor cursor = db.query(
+//		    table_name,  // The table to query
+//		    null,                               // The columns to return
+//		    null,                                // The columns for the WHERE clause
+//		    null,                            // The values for the WHERE clause
+//		    null,                                     // don't group the rows
+//		    null,                                     // don't filter by row groups
+//		    null                                 // The sort order
+//		    );
+		Cursor cursor = db.rawQuery(sql_query, null);
 		cursor.moveToFirst();
-		cursor.moveToNext();
-		return cursor.getString(1);
+		return cursor;
 	}
 }
