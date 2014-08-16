@@ -29,7 +29,7 @@ public class GymdbHelper extends SQLiteOpenHelper{
 	private static final String SQL_CREATE_GROUPS = 
 			"CREATE TABLE " + Group.TABLE_NAME + " (" + 
 			Group._ID + " INTEGER PRIMARY KEY," +
-			Group.COLUMN_NAME_LAST_DATE + " DATE," +
+			Group.COLUMN_NAME_LAST_DATE + " DATETIME," +
 	    	Group.COLUMN_NAME_NAME+ TEXT_TYPE + ")";
 
 	private static final String SQL_DELETE_GROUPS =
@@ -105,9 +105,12 @@ public class GymdbHelper extends SQLiteOpenHelper{
 		values.put(Set.COLUMN_NAME_GROUP, group_id);
 		values.put(Set.COLUMN_NAME_MUSCLE, muscle_id);
 		db.insert(Set.TABLE_NAME, null, values);
-	}
+	}	
 	
 	public static Cursor readData(Context context, String sql_query){
+		return readData(context, sql_query, null);
+	}
+	public static Cursor readData(Context context, String sql_query, String[] selectionArgs){
 		GymdbHelper mDbHelper = new GymdbHelper(context);
 		SQLiteDatabase db = mDbHelper.getReadableDatabase();
 
@@ -120,7 +123,7 @@ public class GymdbHelper extends SQLiteOpenHelper{
 //		    null,                                     // don't filter by row groups
 //		    null                                 // The sort order
 //		    );
-		Cursor cursor = db.rawQuery(sql_query, null);
+		Cursor cursor = db.rawQuery(sql_query, selectionArgs);
 		cursor.moveToFirst();
 		return cursor;
 	}

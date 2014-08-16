@@ -1,10 +1,6 @@
 package com.appazal.gymaster;
 
 
-import com.appazal.gymaster.Gymdb.Group;
-import com.appazal.gymaster.R;
-import com.appazal.gymaster.Gymdb.Muscle;
-
 import android.app.Activity;
 import android.os.Bundle;
 
@@ -25,8 +21,10 @@ public class MainActivity extends Activity {
 	public void onResume(){
 		super.onResume();
 		l("Sql seed data : " + GymdbHelper.SQL_SEED_GROUP);
-		System.out.println("Muscle Value " + GymdbHelper.readData(getApplicationContext(), CustQuery.NEXT_SET).getString(1));
-		l("Group Value " + GymdbHelper.readData(getApplicationContext(), CustQuery.NEXT_SET).getString(2));
+	
+		l("Group Name " + GymdbHelper.readData(getApplicationContext(), CustQuery.GRP_NAME, new String[]{"2"}).getString(2));
+		
+		System.out.println("Muscle Value " + GymdbHelper.readData(getApplicationContext(), CustQuery.NEXT_SET).getString(2));
 	}
 	
 	@Override
@@ -47,6 +45,12 @@ public class MainActivity extends Activity {
 	public void l(String str){
 		System.out.println(str);
 	}
+	
+	public void markGroupDoneToday(String group_id){
+		GymdbHelper.readData(getApplicationContext(), CustQuery.UPDATE_GROUP, new String[]{group_id});
+	}
+	
+	public void getNextGroup(){
+		GymdbHelper.readData(getApplicationContext(), CustQuery.NEXT_SET);
+	}
 }
-
-
