@@ -20,7 +20,7 @@ public class GymdbHelper extends SQLiteOpenHelper{
 	private static final String COMMA_SEP = ",";
 	private static final String SQL_CREATE_MUSCLES= 
 			"CREATE TABLE " + Muscle.TABLE_NAME + " (" + 
-	    	Muscle._ID + " INTEGER PRIMARY KEY," +
+	    	Muscle._ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
 	    	Muscle.COLUMN_NAME_NAME+ TEXT_TYPE + ")";
 
 	private static final String SQL_DELETE_MUSCLES =
@@ -28,7 +28,7 @@ public class GymdbHelper extends SQLiteOpenHelper{
 
 	private static final String SQL_CREATE_GROUPS = 
 			"CREATE TABLE " + Group.TABLE_NAME + " (" + 
-			Group._ID + " INTEGER PRIMARY KEY," +
+			Group._ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
 			Group.COLUMN_NAME_LAST_DATE + " DATETIME," +
 	    	Group.COLUMN_NAME_NAME+ TEXT_TYPE + ")";
 
@@ -37,18 +37,20 @@ public class GymdbHelper extends SQLiteOpenHelper{
 
 	private static final String SQL_CREATE_SETS = 
 			"CREATE TABLE " + Set.TABLE_NAME + " (" + 
-			Set._ID + " INTEGER PRIMARY KEY," +
 	    	Set.COLUMN_NAME_MUSCLE+ TEXT_TYPE + COMMA_SEP + 
 	    	Set.COLUMN_NAME_GROUP+ TEXT_TYPE + ")";
-
 	
 	static final String SQL_SEED_MUSCLES = 
 			"INSERT INTO " + Muscle.TABLE_NAME + "(" + Muscle.COLUMN_NAME_NAME + ")" + 
 			"VALUES (\"" + TextUtils.join("\"),(\"",SeedData.Muscles) + "\")"; 
 
-	static final String SQL_SEED_GROUP = 
+	static final String SQL_SEED_GROUPS = 
 			"INSERT INTO " + Group.TABLE_NAME + "(" + Group.COLUMN_NAME_NAME + ")" + 
 			"VALUES (\"" + TextUtils.join("\"),(\"",SeedData.Groups) + "\")";
+	
+	static final String SQL_SEED_SETS = 
+			"INSERT INTO " + Set.TABLE_NAME + "(" + Set.COLUMN_NAME_GROUP  + COMMA_SEP  + Set.COLUMN_NAME_MUSCLE + ")" + 
+			"VALUES " + SeedData.Sets;
 	
 	private static final String SQL_DELETE_SETS =
 	    "DROP TABLE IF EXISTS " + Set.TABLE_NAME;
@@ -64,9 +66,11 @@ public class GymdbHelper extends SQLiteOpenHelper{
 		db.execSQL(SQL_CREATE_GROUPS);
 		db.execSQL(SQL_CREATE_SETS);
 		db.execSQL(SQL_SEED_MUSCLES);
-		db.execSQL(SQL_SEED_GROUP);
+		db.execSQL(SQL_SEED_GROUPS);
+		db.execSQL(SQL_SEED_SETS);
+		db.execSQL(CustQuery.RESET_GROUP_TIME);
 	}
-
+	
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 		db.execSQL(SQL_DELETE_MUSCLES);

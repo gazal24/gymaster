@@ -24,6 +24,5 @@ public final class Gymdb implements BaseColumns {
 		public static final String COLUMN_NAME_MUSCLE = "muscle_id";
 		public static final String COLUMN_NAME_GROUP = "group_id";
 	}
-	
 }
 
