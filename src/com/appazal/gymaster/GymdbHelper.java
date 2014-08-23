@@ -18,7 +18,7 @@ public class GymdbHelper extends SQLiteOpenHelper{
 
 	private static final String TEXT_TYPE = " TEXT";
 	private static final String COMMA_SEP = ",";
-	private static final String SQL_CREATE_MUSCLES= 
+	 static final String SQL_CREATE_MUSCLES= 
 			"CREATE TABLE " + Muscle.TABLE_NAME + " (" + 
 	    	Muscle._ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
 	    	Muscle.COLUMN_NAME_NAME+ TEXT_TYPE + ")";
@@ -26,7 +26,7 @@ public class GymdbHelper extends SQLiteOpenHelper{
 	private static final String SQL_DELETE_MUSCLES =
 	    "DROP TABLE IF EXISTS " + Muscle.TABLE_NAME;
 
-	private static final String SQL_CREATE_GROUPS = 
+	static final String SQL_CREATE_GROUPS = 
 			"CREATE TABLE " + Group.TABLE_NAME + " (" + 
 			Group._ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
 			Group.COLUMN_NAME_LAST_DATE + " DATETIME," +
@@ -35,7 +35,7 @@ public class GymdbHelper extends SQLiteOpenHelper{
 	private static final String SQL_DELETE_GROUPS =
 	    "DROP TABLE IF EXISTS " + Group.TABLE_NAME;
 
-	private static final String SQL_CREATE_SETS = 
+	static final String SQL_CREATE_SETS = 
 			"CREATE TABLE " + Set.TABLE_NAME + " (" + 
 	    	Set.COLUMN_NAME_MUSCLE+ TEXT_TYPE + COMMA_SEP + 
 	    	Set.COLUMN_NAME_GROUP+ TEXT_TYPE + ")";
@@ -114,6 +114,7 @@ public class GymdbHelper extends SQLiteOpenHelper{
 	public static Cursor readData(Context context, String sql_query){
 		return readData(context, sql_query, null);
 	}
+	
 	public static Cursor readData(Context context, String sql_query, String[] selectionArgs){
 		GymdbHelper mDbHelper = new GymdbHelper(context);
 		SQLiteDatabase db = mDbHelper.getReadableDatabase();

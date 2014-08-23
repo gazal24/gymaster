@@ -1,11 +1,18 @@
 package com.appazal.gymaster;
 
 
+import org.json.JSONObject;
+
 import android.app.Activity;
+import android.database.Cursor;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.TextView;
 
 public class MainActivity extends Activity {
 
+	public static String current_group_id;
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -55,7 +62,31 @@ public class MainActivity extends Activity {
 		GymdbHelper.readData(getApplicationContext(), CustQuery.UPDATE_GROUP_TIME, new String[]{group_id});
 	}
 	
-	public String getNextGroup(){
-		return GymdbHelper.readData(getApplicationContext(), CustQuery.NEXT_SET).getString(2);
+	public Cursor getNextGroup(){
+		return GymdbHelper.readData(getApplicationContext(), CustQuery.NEXT_GROUP_AND_MUSCLES);
+	}
+	
+	public void updateToday(View view){
+		l("BUTTON CLICKED");
+	}
+	
+	public void getTodayGroup(View view){
+		Cursor c = getNextGroup();
+
+		String group_name = c.getString(1);
+		TextView v = (TextView)findViewById(R.id.group_name);
+		v.setText(group_name);
+		
+		String date = c.getString(3);
+		v = (TextView)findViewById(R.id.group_time);
+		v.setText(date);
+		
+		String muscle_name = c.getString(2);
+		while(c.moveToNext()){
+			muscle_name += "\n" + c.getString(2);
+		}
+		
+		v = (TextView)findViewById(R.id.muscle_name);
+		v.setText(muscle_name);
 	}
 }

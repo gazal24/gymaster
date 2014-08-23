@@ -1,12 +1,51 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="${packageName}.${activityClass}" >
+    android:orientation="vertical" >
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/hello_world" />
+        
+    <Button 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="getTodayGroup"
+        android:text="@string/get_today"/>
+    
+	<TextView
+	    android:id="@+id/group_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FA8258"
+        android:gravity="center"
+        android:textSize="20dp"
+        android:text="Hello" />
+    
+	<TextView
+	    android:id="@+id/group_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FA8258"
+        android:gravity="right"
+        android:textSize="10dp"
+        android:textStyle="italic"
+        android:text="Hello" />
 
-</RelativeLayout>
+	<TextView
+	    android:id="@+id/muscle_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#A9D0F5"
+		android:gravity="center"
+        android:textSize="20dp"
+        android:text="Hello" />
+	
+    <Button 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="updateToday"
+        android:text="@string/update_today"/>
+</LinearLayout>
