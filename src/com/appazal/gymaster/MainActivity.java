@@ -66,12 +66,13 @@ public class MainActivity extends Activity {
 		return GymdbHelper.readData(getApplicationContext(), CustQuery.NEXT_GROUP_AND_MUSCLES);
 	}
 	
-	public void updateToday(View view){
-		l("BUTTON CLICKED");
+	public void updateTodayButtonClick(View view){
+		markGroupDoneToday(current_group_id);
 	}
 	
-	public void getTodayGroup(View view){
+	public void getNextGroupButtonClick(View view){
 		Cursor c = getNextGroup();
+		current_group_id = c.getString(0);
 
 		String group_name = c.getString(1);
 		TextView v = (TextView)findViewById(R.id.group_name);
