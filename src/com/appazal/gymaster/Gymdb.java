@@ -5,7 +5,6 @@ import android.provider.BaseColumns;
 public final class Gymdb implements BaseColumns {
 	
 	public Gymdb(){
-		
 	}
 	
 	public static abstract class Muscle implements BaseColumns{

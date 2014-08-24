@@ -2,6 +2,6 @@
 <resources>
     <string name="app_name">Gymaster</string>
     <string name="update_today">Completed!</string>
-    <string name="get_today">Muscles Today!</string>
+    <string name="get_today">See Today\'s Workout!</string>
     <string name="skip_text">skip</string>
 </resources>

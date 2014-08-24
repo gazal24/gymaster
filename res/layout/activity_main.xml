@@ -25,6 +25,7 @@
 	        android:layout_height="match_parent"
 	        android:onClick="getNextGroupButtonClick"
 	        android:text="@string/get_today"
+	        android:textStyle="bold"
 	        android:textColor="#FFFFFF"
 	        android:background="#A2AB58"
 	        android:layout_weight="1"/>
@@ -52,6 +53,7 @@
         android:background="#E44424"
         android:textColor="#FFFFFF"
         android:gravity="right"
+        android:paddingRight="10dp"
         android:textSize="15dp"
         android:textStyle="italic"
         android:text="" />
@@ -73,6 +75,7 @@
         android:layout_weight="20"
         android:onClick="updateTodayButtonClick"
         android:text="@string/update_today"
+        android:textStyle="bold"
         android:textColor="#FFFFFF"
         android:background="#A2AB58" />
 	

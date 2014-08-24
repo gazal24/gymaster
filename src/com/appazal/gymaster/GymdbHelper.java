@@ -5,7 +5,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.database.sqlite.SQLiteStatement;
 import android.text.TextUtils;
 
 import com.appazal.gymaster.Gymdb.Group;
@@ -58,7 +57,6 @@ public class GymdbHelper extends SQLiteOpenHelper{
 
 	public GymdbHelper(Context context) {
 		super(context, DATABASE_NAME, null , DATABASE_VERSION);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
@@ -120,15 +118,6 @@ public class GymdbHelper extends SQLiteOpenHelper{
 		GymdbHelper mDbHelper = new GymdbHelper(context);
 		SQLiteDatabase db = mDbHelper.getReadableDatabase();
 
-//		Cursor cursor = db.query(
-//		    table_name,  // The table to query
-//		    null,                               // The columns to return
-//		    null,                                // The columns for the WHERE clause
-//		    null,                            // The values for the WHERE clause
-//		    null,                                     // don't group the rows
-//		    null,                                     // don't filter by row groups
-//		    null                                 // The sort order
-//		    );
 		Cursor cursor = db.rawQuery(sql_query, selectionArgs);
 		cursor.moveToFirst();
 		return cursor;
