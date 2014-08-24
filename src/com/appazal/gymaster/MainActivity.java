@@ -37,7 +37,7 @@ public class MainActivity extends Activity {
 		l("create muscle " + GymdbHelper.SQL_CREATE_SETS);
 		l("Group Name " + GymdbHelper.readData(getApplicationContext(), CustQuery.GROUP_NAME, new String[]{"2"}).getString(2));
 
-		Button skip_button = (Button)  findViewById(R.id.skip_count_btn);
+		Button skip_button = (Button) findViewById(R.id.skip_count_btn);
 		skip_button.setOnLongClickListener(new OnLongClickListener() {			
 			@Override
 			public boolean onLongClick(View v) {
@@ -87,14 +87,20 @@ public class MainActivity extends Activity {
 	public void updateTodayButtonClick(View view){
 		markGroupDoneToday(current_group_id);
 		skip_count = 0;
+		setSkipButtonText();
 	}
 	
 	public void skipButtonClick(View view){
 		skip_count++;
 		if(skip_count >= SeedData.Groups.length) skip_count = 0;
-		((Button) view).setText(getString(R.string.skip_text) + (skip_count != 0 ? "("+skip_count+")" : ""));
+		setSkipButtonText();
 	}
 
+	public void setSkipButtonText(){
+		Button view = (Button)findViewById(R.id.skip_count_btn);
+		view.setText(getString(R.string.skip_text) + (skip_count != 0 ? "("+skip_count+")" : ""));
+	}
+	
 	public void getNextGroupButtonClick(View view){
 		Cursor c = getNextGroup(skip_count);
 		current_group_id = c.getString(0);

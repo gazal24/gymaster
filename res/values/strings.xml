@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <string name="app_name">Gymaster</string>
-    <string name="hello_world">Hello world!</string>
     <string name="update_today">Completed!</string>
     <string name="get_today">Get Workout Muscles for Today!</string>
     <string name="skip_text">Skip this!</string>

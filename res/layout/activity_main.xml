@@ -2,35 +2,55 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
-        
-    <Button 
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="getNextGroupButtonClick"
-        android:text="@string/get_today"/>
-    
+	<LinearLayout
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="horizontal"
+	    android:layout_weight="20">
+
+	    <Button 
+		    android:id="@+id/skip_count_btn"
+	        android:layout_width="match_parent"
+	        android:layout_height="match_parent"
+	        android:onClick="skipButtonClick"
+	        android:text="@string/skip_text"
+			android:textColor="#FFFFFF"
+	        android:background="#B3BC69"
+	        android:layout_weight="4" />
+
+	    <Button 
+	        android:layout_width="match_parent"
+	        android:layout_height="match_parent"
+	        android:onClick="getNextGroupButtonClick"
+	        android:text="@string/get_today"
+	        android:textColor="#FFFFFF"
+	        android:background="#A2AB58"
+	        android:layout_weight="1"/>
+
+	</LinearLayout>
+
 	<TextView
 	    android:id="@+id/group_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#FA8258"
+        android:layout_weight="25"
+        android:background="#E44424"
+        android:textColor="#FFFFFF"
         android:gravity="center"
-        android:textSize="20dp"
+        android:textSize="30dp"
         android:text="Hello" />
     
 	<TextView
 	    android:id="@+id/group_time"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#FA8258"
+        android:layout_weight="5"
+        android:background="#E44424"
+        android:textColor="#FFFFFF"
         android:gravity="right"
-        android:textSize="10dp"
+        android:textSize="15dp"
         android:textStyle="italic"
         android:text="Hello" />
 
@@ -38,21 +58,20 @@
 	    android:id="@+id/muscle_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#A9D0F5"
+        android:layout_weight="30"
+        android:background="#67BCDB"
+        android:textColor="#FFFFFF"
 		android:gravity="center"
-        android:textSize="20dp"
+        android:textSize="30dp"
         android:text="Hello" />
 	
     <Button 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_weight="20"
         android:onClick="updateTodayButtonClick"
-        android:text="@string/update_today"/>
+        android:text="@string/update_today"
+        android:textColor="#FFFFFF"
+        android:background="#A2AB58" />
 	
-	<Button 
-	    android:id="@+id/skip_count_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="skipButtonClick"
-        android:text="@string/skip_text"/>
 </LinearLayout>
