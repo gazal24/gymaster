@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnLongClickListener;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,12 +37,10 @@ public class MainActivity extends Activity {
 		skip_button.setOnLongClickListener(new OnLongClickListener() {			
 			@Override
 			public boolean onLongClick(View v) {
-				// TODO Auto-generated method stub
 				skip_count = -1;
 				return false;
 			}
 		});
-		
 	}
 	
 	@Override
