@@ -1,15 +1,19 @@
 package com.appazal.gymaster;
 
 
+import java.util.Random;
+
 import org.json.JSONObject;
 
 import android.app.Activity;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnLongClickListener;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends Activity {
 
@@ -67,6 +71,11 @@ public class MainActivity extends Activity {
 		super.onDestroy();
 	}
 	
+	@Override
+	public void finish(){
+		super.finish();
+	}
+
 	public void l(String str){
 		System.out.println(str);
 	}
@@ -88,6 +97,8 @@ public class MainActivity extends Activity {
 		markGroupDoneToday(current_group_id);
 		skip_count = 0;
 		setSkipButtonText();
+		Random rand = new  Random();
+		sendToast(SeedData.UpdateMessage[rand.nextInt(SeedData.UpdateMessage.length)]);
 	}
 	
 	public void skipButtonClick(View view){
@@ -120,5 +131,15 @@ public class MainActivity extends Activity {
 		
 		v = (TextView)findViewById(R.id.muscle_name);
 		v.setText(muscle_name);
+	}
+	
+	public void sendToast(String message){
+		Toast t = Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG);
+		t.setGravity(Gravity.CENTER,0,0);
+		t.show();
+	}
+	
+	public void exit_application(View v){
+		finish();
 	}
 }
