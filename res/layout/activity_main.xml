@@ -48,4 +48,11 @@
         android:layout_height="wrap_content"
         android:onClick="updateTodayButtonClick"
         android:text="@string/update_today"/>
+	
+	<Button 
+	    android:id="@+id/skip_count_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="skipButtonClick"
+        android:text="@string/skip_text"/>
 </LinearLayout>

@@ -7,12 +7,15 @@ import android.app.Activity;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
+import android.view.View.OnLongClickListener;
+import android.widget.Button;
 import android.widget.TextView;
 
 public class MainActivity extends Activity {
 
 	public static String current_group_id;
-	
+	public static int skip_count = 0;
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -33,10 +36,20 @@ public class MainActivity extends Activity {
 		l("create muscle " + GymdbHelper.SQL_CREATE_GROUPS);
 		l("create muscle " + GymdbHelper.SQL_CREATE_SETS);
 		l("Group Name " + GymdbHelper.readData(getApplicationContext(), CustQuery.GROUP_NAME, new String[]{"2"}).getString(2));
+
+		Button skip_button = (Button)  findViewById(R.id.skip_count_btn);
+		skip_button.setOnLongClickListener(new OnLongClickListener() {			
+			@Override
+			public boolean onLongClick(View v) {
+				// TODO Auto-generated method stub
+				skip_count = -1;
+				return false;
+			}
+		});
 		
-		l ("Get next 0" + GymdbHelper.readData(getApplicationContext(), CustQuery.NEXT_GROUP_AND_MUSCLES).getString(0));
-		l ("Get next 1" + GymdbHelper.readData(getApplicationContext(), CustQuery.NEXT_GROUP_AND_MUSCLES).getString(1));
-		l ("Get next 2" + GymdbHelper.readData(getApplicationContext(), CustQuery.NEXT_GROUP_AND_MUSCLES).getString(2));
+//		l ("Get next 0" + GymdbHelper.readData(getApplicationContext(), CustQuery.NEXT_GROUP_AND_MUSCLES).getString(0));
+//		l ("Get next 1" + GymdbHelper.readData(getApplicationContext(), CustQuery.NEXT_GROUP_AND_MUSCLES).getString(1));
+//		l ("Get next 2" + GymdbHelper.readData(getApplicationContext(), CustQuery.NEXT_GROUP_AND_MUSCLES).getString(2));
 	}
 	
 	@Override
@@ -62,16 +75,28 @@ public class MainActivity extends Activity {
 		GymdbHelper.readData(getApplicationContext(), CustQuery.UPDATE_GROUP_TIME, new String[]{group_id});
 	}
 	
-	public Cursor getNextGroup(){
-		return GymdbHelper.readData(getApplicationContext(), CustQuery.NEXT_GROUP_AND_MUSCLES);
+	public Cursor getNextGroup(int offset){
+		String NEXT_GROUP_QUERY = String.format(CustQuery.NEXT_GROUP_AND_MUSCLES, offset);
+		return GymdbHelper.readData(getApplicationContext(), NEXT_GROUP_QUERY);
 	}
 	
+	public Cursor getNextGroup(){
+		return getNextGroup(0);
+	}
+
 	public void updateTodayButtonClick(View view){
 		markGroupDoneToday(current_group_id);
+		skip_count = 0;
 	}
 	
+	public void skipButtonClick(View view){
+		skip_count++;
+		if(skip_count >= SeedData.Groups.length) skip_count = 0;
+		((Button) view).setText(getString(R.string.skip_text) + (skip_count != 0 ? "("+skip_count+")" : ""));
+	}
+
 	public void getNextGroupButtonClick(View view){
-		Cursor c = getNextGroup();
+		Cursor c = getNextGroup(skip_count);
 		current_group_id = c.getString(0);
 
 		String group_name = c.getString(1);

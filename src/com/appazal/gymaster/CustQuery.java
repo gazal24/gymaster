@@ -19,6 +19,6 @@ public class CustQuery {
 	public static final String NEXT_GROUP_AND_MUSCLES = "select P._id as group_id, P.name as group_name,"
 			+ "	muscles.name as muscle_name, last_date from muscles "
 			+ "	join (select G._id, last_date, name, muscle_id from sets "
-			+ "			join (select * from groups order by last_date asc limit 1) G on (G._id = sets.group_id) "
+			+ "			join (select * from groups order by last_date asc limit %s,1) G on (G._id = sets.group_id) "
 			+ "	) AS P on (muscles._id = P.muscle_id);";
 }

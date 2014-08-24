@@ -7,6 +7,8 @@ public class SeedData {
 	
 	public static String Groups[] = {"G1", "G2", "G3", "G4", "G5"};
 	
+//	public static String ComplimentaryMuscles[] = {"Forearm", "Collar", "Biceps", "Triceps", "Calfs"};
+	
 //	public static int Sets[][] = {
 //		{1,1},{1,2},
 //		{2,1},{2,2},

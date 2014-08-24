@@ -5,4 +5,5 @@
     <string name="hello_world">Hello world!</string>
     <string name="update_today">Completed!</string>
     <string name="get_today">Get Workout Muscles for Today!</string>
+    <string name="skip_text">Skip this!</string>
 </resources>
