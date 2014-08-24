@@ -34,7 +34,7 @@ public class MainActivity extends Activity {
 		super.onResume();
 		skip_count = 0;
 		
-		Button skip_button = (Button) findViewById(R.id.skip_count_btn);
+		TextView skip_button = (TextView) findViewById(R.id.skip_count_btn);
 		skip_button.setOnLongClickListener(new OnLongClickListener() {			
 			@Override
 			public boolean onLongClick(View v) {
@@ -90,7 +90,7 @@ public class MainActivity extends Activity {
 		}
 		markGroupDoneToday(current_group_id);
 		skip_count = 0;
-		setSkipButtonText();
+		setSkipTextClick();
 		Random rand = new  Random();
 		sendToast(SeedData.UpdateMessage[rand.nextInt(SeedData.UpdateMessage.length)]);
 	}
@@ -98,11 +98,11 @@ public class MainActivity extends Activity {
 	public void skipButtonClick(View view){
 		skip_count++;
 		if(skip_count >= SeedData.Groups.length) skip_count = 0;
-		setSkipButtonText();
+		setSkipTextClick();
 	}
 
-	public void setSkipButtonText(){
-		Button view = (Button)findViewById(R.id.skip_count_btn);
+	public void setSkipTextClick(){
+		TextView view = (TextView)findViewById(R.id.skip_count_btn);
 		view.setText(getString(R.string.skip_text) + (skip_count != 0 ? "("+skip_count+")" : ""));
 	}
 	
